@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get("/", [\App\Http\Controllers\UsuarioController::class, 'main'])->name("site.main");
+Route::get("/", [\App\Http\Controllers\UsuarioController::class, 'main'])->name("site.index");
 
 Route::group(['prefix' => 'usuarios'], function () {
     Route::get("/", [\App\Http\Controllers\UsuarioController::class, 'index'])->name("usuario.index");

@@ -75,6 +75,9 @@
                 <div class="row endereco_usuario mb-3 shadow">
                     <div class="col-md-3">
                         <label for="cep">Cep</label>
+                        <i class="fa-solid fa-circle-info" style="cursor: pointer;" data-bs-toggle="tooltip" data-bs-placement="top"
+                           title="Os cep's podem ser encontrados na listagem de endereços"></i>
+
                         <input type="text" class="form-control cep" id="cep" placeholder="ex: 47986-987">
                     </div>
 
@@ -83,7 +86,7 @@
                         <input type="text" class="form-control nome_rua" id="nome_rua"
                                placeholder="ex: Travessa Fonseca" readonly>
                     </div>
-                    
+
                     <div class="col-md-3">
                         <label for="numero">Numero</label>
                         <input type="text" class="form-control numero" id="numero" placeholder="ex: 35"
