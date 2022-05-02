@@ -21,10 +21,5 @@ class Usuario extends Model
     {
         return $this->belongsToMany(Logradouro::class, "logradouro_usuario", "id_usuario", "id_logradouro");
     }
-
-    function limpaCPF_CNPJ($valor)
-    {
-        $valor = preg_replace('/[^0-9]/', '', $valor);
-        return $valor;
-    }
+    
 }

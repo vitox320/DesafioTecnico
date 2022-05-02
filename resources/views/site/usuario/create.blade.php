@@ -78,7 +78,7 @@
                         <i class="fa-solid fa-circle-info" style="cursor: pointer;" data-bs-toggle="tooltip" data-bs-placement="top"
                            title="Os cep's podem ser encontrados na listagem de endereços"></i>
 
-                        <input type="text" class="form-control cep" id="cep" placeholder="ex: 47986-987">
+                        <input type="text" name="cep[]" class="form-control cep" id="cep" placeholder="ex: 47986-987">
                     </div>
 
                     <div class="col-md-6">

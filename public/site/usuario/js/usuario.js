@@ -206,7 +206,7 @@ const gerarHtmlEnderecos = () => {
         '</div>' +
         '<div class="col-md-3">' +
         '<label for="cep">Cep</label>' +
-        '<input type="text"  class="form-control cep" id="cep" placeholder="ex: 47986-987">' +
+        '<input type="text" name="cep[]" class="form-control cep" id="cep" placeholder="ex: 47986-987">' +
         '</div>' +
         '<div class="col-md-6">' +
         '<label for="nome_rua">Logradouro</label>' +

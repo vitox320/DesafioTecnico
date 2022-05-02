@@ -67,11 +67,12 @@ class UsuarioController extends Controller
             $usuario->id_perfil = $request->perfil;
             $usuario->save();
 
-            $logradouro = $request->id_logradouro;
+            $arrayCeps = $request->cep;
 
-            for ($i = 0; $i < sizeof($logradouro); $i++) {
+            for ($i = 0; $i < sizeof($arrayCeps); $i++) {
+                $logradouro = Logradouro::where("cep", $arrayCeps[$i])->first();
                 $endereco = new Endereco();
-                $endereco->id_logradouro = (int)$logradouro[$i];
+                $endereco->id_logradouro = $logradouro->id;
                 $endereco->id_usuario = $usuario->id;
                 $endereco->save();
             }
