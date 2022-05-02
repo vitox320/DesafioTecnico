@@ -112,15 +112,17 @@ class UsuarioController extends Controller
             $usuario->email = $request->email;
             $usuario->cpf = UtilString::limpaCPF_CNPJ($request->cpf);
             $usuario->id_perfil = $request->perfil;
-
-            $usuarioLogradouros = $usuario->logradouros;
-            $arrayCeps = $request->cep;
             $usuario->save();
+            
+            $arrayCeps = $request->cep;
 
+            $endereco = Endereco::where("id_usuario", $usuario->id)->get();
 
-            for ($i = 0; $i < sizeof($arrayCeps); $i++) {
+            for ($i = 0; $i < sizeof($endereco); $i++) {
                 $logradouro = Logradouro::where("cep", $arrayCeps[$i])->first();
-                Endereco::where("id_logradouro", $usuarioLogradouros[$i]->id)->update(["id_logradouro" => $logradouro->id]);
+                $atualizaEndereco = Endereco::find($endereco[$i]->id);
+                $atualizaEndereco->id_logradouro = $logradouro->id;
+                $atualizaEndereco->save();
             }
 
             DB::commit();
