@@ -21,5 +21,5 @@ class Usuario extends Model
     {
         return $this->belongsToMany(Logradouro::class, "logradouro_usuario", "id_usuario", "id_logradouro");
     }
-    
+
 }
