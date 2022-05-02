@@ -14,6 +14,6 @@ class Logradouro extends Model
 
     public function usuarios()
     {
-        return $this->belongsToMany(Usuario::class, "logradouro_usuario", "id_usuario", "id_logradouro");
+        return $this->belongsToMany(Usuario::class, "logradouro_usuario", "id_logradouro", "id_usuario");
     }
 }

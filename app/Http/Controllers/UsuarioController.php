@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreUsuarioRequest;
 use App\Http\Requests\UpdateUsuarioRequest;
 use App\Models\Endereco;
+use App\Models\Logradouro;
 use App\Models\Perfil;
 use App\Models\Usuario;
 use App\Util\UtilData;
 use App\Util\UtilString;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -19,6 +21,7 @@ class UsuarioController extends Controller
     {
         return view("welcome");
     }
+
     public function index(Request $request)
     {
 
@@ -68,7 +71,7 @@ class UsuarioController extends Controller
 
             for ($i = 0; $i < sizeof($logradouro); $i++) {
                 $endereco = new Endereco();
-                $endereco->id_logradouro = $logradouro[$i];
+                $endereco->id_logradouro = (int)$logradouro[$i];
                 $endereco->id_usuario = $usuario->id;
                 $endereco->save();
             }
@@ -102,19 +105,28 @@ class UsuarioController extends Controller
     public function update(UpdateUsuarioRequest $request, $id)
     {
         try {
-            $usuario = Usuario::find($id);
+            DB::beginTransaction();
+            $usuario = Usuario::with("perfil", "logradouros")->find($id);
 
             $usuario->nome_usuario = $request->nome;
             $usuario->email = $request->email;
             $usuario->cpf = UtilString::limpaCPF_CNPJ($request->cpf);
             $usuario->id_perfil = $request->perfil;
 
+            $usuarioLogradouros = $usuario->logradouros;
+            $arrayCeps = $request->cep;
+            $usuario->save();
 
-            $usuario->logradouros()->sync($request->id_logradouro);
 
-            $usuario->push();
+            for ($i = 0; $i < sizeof($arrayCeps); $i++) {
+                $logradouro = Logradouro::where("cep", $arrayCeps[$i])->first();
+                Endereco::where("id_logradouro", $usuarioLogradouros[$i]->id)->update(["id_logradouro" => $logradouro->id]);
+            }
+
+            DB::commit();
             return redirect()->route('usuario.index')->with(['usuarioCreate' => true, 'msg' => 'Usuario atualizado com sucesso!']);
         } catch (\Exception $exception) {
+            DB::rollBack();
             return redirect()->back()->with(['usuarioCreate' => false, 'msg' => $exception->getMessage()]);
         }
 

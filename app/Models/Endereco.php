@@ -11,5 +11,5 @@ class Endereco extends Model
     protected $table = 'logradouro_usuario';
     protected $fillable = ['id_logradouro','id_usuario'];
 
-
+    public $timestamps = false;
 }

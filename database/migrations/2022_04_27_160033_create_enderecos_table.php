@@ -25,7 +25,6 @@ class CreateEnderecosTable extends Migration
             $table->foreign("id_usuario")->references("id")->on("usuarios")
                 ->onUpdate("cascade")
                 ->onDelete("cascade");
-            $table->timestamps();
         });
     }
 

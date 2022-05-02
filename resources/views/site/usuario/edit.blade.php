@@ -80,7 +80,8 @@
                     <div class="row endereco_usuario mb-3 shadow">
                         <div class="col-md-3">
                             <label for="cep">Cep</label>
-                            <input type="text" class="form-control cep" id="cep" placeholder="ex: 47986-987"
+                            <input type="text" class="form-control cep" name="cep[]" id="cep"
+                                   placeholder="ex: 47986-987"
                                    value="{{$logradouros->cep}}">
                         </div>
                         <div class="col-md-6">
