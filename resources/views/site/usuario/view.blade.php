@@ -21,7 +21,7 @@
                     <h5>Endereço</h5>
                     <div class="row">
                         @foreach($usuario->logradouros as $logradouros)
-                            <div class="col-md-6 ">
+                            <div class="col-md-6 mt-2">
                                 <div><strong>Cep:</strong> {{$logradouros->cep}} </div>
                                 <div><strong> Logradouro:</strong> {{$logradouros->nome_rua}} </div>
                                 <div><strong>Numero:</strong> {{$logradouros->numero}} </div>
