@@ -36,12 +36,11 @@ class UsuarioController extends Controller
         if ($request->cpf) {
             $usuario->where("cpf", "LIKE", "%" . UtilString::limpaCPF_CNPJ($request->cpf) . "%");
         }
+
         if ($request->dataInicio && $request->dataFim) {
             $usuario->whereBetween("created_at", [UtilData::toSqlDate($data_inicio), UtilData::toSqlDate($data_fim)]);
         }
-        if ($request->dataInicio) {
-            $usuario->whereDate("created_at", "=", UtilData::toSqlDate($request->dataInicio));
-        }
+
 
         $usuarios = $usuario->paginate(10);
         return view("site.usuario.index")->with(["usuario" => $usuarios]);

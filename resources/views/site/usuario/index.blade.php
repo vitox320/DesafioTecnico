@@ -38,7 +38,7 @@
                            placeholder="ex: 15/04/2022">
                 </td>
                 <td>
-                    <label for="dataFim">Ate </label>
+                    <label for="dataFim">Até </label>
                     <input class="form-control" type="text" name="dataFim" id="dataFim" placeholder="ex: 15/04/2025">
                 </td>
 
